@@ -23,8 +23,7 @@ Complete reference of every endpoint: parameters, defaults, enums, and where par
 13. [Economic Calendar `/api/calendar`](#12-economic-calendar)
 14. [Logo Proxy `/logo`](#13-logo-proxy)
 15. [Token & MCP](#14-token--mcp)
-16. [Health](#15-health)
-17. [Realtime: SSE & WebSocket](#16-realtime-sse--websocket)
+16. [Realtime: SSE & WebSocket](#15-realtime-sse--websocket)
 
 ---
 
@@ -252,7 +251,7 @@ Use a full config `id` from `GET /api/metadata/tabs` (e.g. `stocks_market_movers
 
 ## 9. Screener
 
-Examples: `examples/17-screener.md`
+Examples: `examples/16-screener.md`
 
 ### Helper endpoints (call these first)
 
@@ -383,16 +382,7 @@ JWT for the MCP (Model Context Protocol) server. Body: `token-jwt-type` (`1`=30m
 
 ---
 
-## 15. Health
-
-Examples: `examples/16-health.md`
-
-- `GET /health` — service status (public)
-- `GET /health/realtime` — realtime connection/performance metrics (requires key)
-
----
-
-## 16. Realtime: SSE & WebSocket
+## 15. Realtime: SSE & WebSocket
 
 Examples: `examples/11-websocket.md`
 

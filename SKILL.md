@@ -50,7 +50,7 @@ Map the user's need to an endpoint family:
 | Buy/Sell signals, RSI, MACD | `GET /api/ta/{symbol}` (summary) or `/api/ta/{symbol}/indicators` (detail) | `04-technical-analysis.md` |
 | Company profile, PE, financials, dividends, analyst ratings | `GET /api/market-data/{symbol}/...` (15 category sub-endpoints) | `12-market-data.md` |
 | Top gainers/losers, rankings by asset class | `GET /api/leaderboard/{stocks\|crypto\|etfs\|forex\|futures\|indices\|bonds\|corporate-bonds}` | `05-leaderboards.md` |
-| Custom filtering ("US stocks with PE < 15 and RSI < 30") | `POST /api/screener/.../scan` (see screener workflow below) | `17-screener.md` |
+| Custom filtering ("US stocks with PE < 15 and RSI < 30") | `POST /api/screener/.../scan` (see screener workflow below) | `16-screener.md` |
 | News | `GET /api/news/{stock\|crypto\|forex\|...}`, detail via `GET /api/news/{newsId}` | `06-news.md` |
 | Trading ideas / community sentiment | `GET /api/ideas/hot`, `/api/ideas/list/{symbol}`, `/api/ideas/{symbol}/minds` | `13-ideas.md` |
 | Earnings / IPO / dividend / macro event dates | `GET /api/calendar/{earnings\|ipo\|revenue\|economic}?from=&to=` (Unix seconds, ≤40-day window) | `08-calendar.md` |
@@ -61,7 +61,7 @@ Map the user's need to an endpoint family:
 
 Full parameter tables, enums, and request/response shapes: read **[references/endpoint-catalog.md](references/endpoint-catalog.md)**.
 
-Captured request/response examples live in `references/examples/` (file names listed in the table above; also `10-mcp.md`, `16-health.md`). Consult the example file before parsing a response shape you haven't seen. In the examples, repeated result rows and long string values are truncated with explicit `(truncated)` markers; all response fields are preserved. The real responses contain the full data.
+Captured request/response examples live in `references/examples/` (file names listed in the table above; also `10-mcp.md`). Consult the example file before parsing a response shape you haven't seen. In the examples, repeated result rows and long string values are truncated with explicit `(truncated)` markers; all response fields are preserved. The real responses contain the full data.
 
 ## Parameters that come from metadata
 
