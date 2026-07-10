@@ -36,30 +36,30 @@ Most endpoints require a RapidAPI key. The helper script resolves it in this ord
 export RAPIDAPI_KEY='your-key-here'
 
 # Or save locally after consent
-python3 scripts/tv_api.py --save-key 'your-key-here'
+python3 skills/tradingview-api-integration/scripts/tv_api.py --save-key 'your-key-here'
 ```
 
 Never commit API keys. `.rapidapi-key` should stay local.
 
 ## Manual API calls
 
-`scripts/tv_api.py` is stdlib-only and pretty-prints JSON responses:
+`skills/tradingview-api-integration/scripts/tv_api.py` is stdlib-only and pretty-prints JSON responses when working from a source checkout:
 
 ```bash
-python3 scripts/tv_api.py GET '/api/quote/NASDAQ:AAPL'
-python3 scripts/tv_api.py GET '/api/price/BINANCE:BTCUSDT?timeframe=60&range=20'
-python3 scripts/tv_api.py GET '/api/metadata/markets'
-python3 scripts/tv_api.py POST '/api/screener/scan' --body '{"market":"america","range":[0,20]}'
+python3 skills/tradingview-api-integration/scripts/tv_api.py GET '/api/quote/NASDAQ:AAPL'
+python3 skills/tradingview-api-integration/scripts/tv_api.py GET '/api/price/BINANCE:BTCUSDT?timeframe=60&range=20'
+python3 skills/tradingview-api-integration/scripts/tv_api.py GET '/api/metadata/markets'
+python3 skills/tradingview-api-integration/scripts/tv_api.py POST '/api/screener/scan' --body '{"market":"america","range":[0,20]}'
 ```
 
 ## What's included
 
 | Path | Purpose |
 |------|---------|
-| `SKILL.md` | Agent instructions: endpoint mapping, workflows, symbol format |
-| `scripts/tv_api.py` | CLI helper for live API calls |
-| `references/endpoint-catalog.md` | Full parameter tables and enums |
-| `references/examples/` | Captured request/response examples per endpoint family |
+| `skills/tradingview-api-integration/SKILL.md` | Agent instructions: endpoint mapping, workflows, symbol format |
+| `skills/tradingview-api-integration/scripts/tv_api.py` | CLI helper for live API calls |
+| `skills/tradingview-api-integration/references/endpoint-catalog.md` | Full parameter tables and enums |
+| `skills/tradingview-api-integration/references/examples/` | Captured request/response examples per endpoint family |
 
 ## Capabilities
 
@@ -81,7 +81,7 @@ Always use `EXCHANGE:TICKER` (e.g. `NASDAQ:AAPL`, `BINANCE:BTCUSDT`). Resolve ba
 
 ## Documentation
 
-See [SKILL.md](./SKILL.md) for the full integration guide. For parameter details, see [references/endpoint-catalog.md](./references/endpoint-catalog.md).
+See [SKILL.md](./skills/tradingview-api-integration/SKILL.md) for the full integration guide. For parameter details, see [references/endpoint-catalog.md](./skills/tradingview-api-integration/references/endpoint-catalog.md).
 
 ## License
 

@@ -113,11 +113,11 @@ git commit -m "fix: package supporting skill files"
 - Consumes: the nested skill directory from Task 1.
 - Produces: correct GitHub links and commands for both installed use and direct source-checkout use.
 
-- [ ] **Step 1: Update README paths**
+- [x] **Step 1: Update README paths**
 
 Keep the public `npx skills add` commands unchanged. Change source-checkout Python examples to `python3 skills/tradingview-api-integration/scripts/tv_api.py ...`, update the included-file table to show the nested paths, and link documentation to `skills/tradingview-api-integration/SKILL.md` and its reference catalog.
 
-- [ ] **Step 2: Check documentation targets**
+- [x] **Step 2: Check documentation targets**
 
 Run:
 
@@ -129,7 +129,7 @@ test -f skills/tradingview-api-integration/references/endpoint-catalog.md
 
 Expected: all commands exit 0.
 
-- [ ] **Step 3: Validate skill metadata and helper behavior**
+- [x] **Step 3: Validate skill metadata and helper behavior**
 
 Run:
 
@@ -141,7 +141,7 @@ env -u RAPIDAPI_KEY python3 skills/tradingview-api-integration/scripts/tv_api.py
 
 Expected: validator reports success; `--help` exits 0; the missing-key invocation exits 2 without making a network request.
 
-- [ ] **Step 4: Run final repository checks**
+- [x] **Step 4: Run final repository checks**
 
 Run:
 
@@ -153,7 +153,7 @@ git status --short
 
 Expected: packaging test passes, `git diff --check` emits no errors, and status contains only intended README changes.
 
-- [ ] **Step 5: Commit documentation**
+- [x] **Step 5: Commit documentation**
 
 ```bash
 git add README.md
