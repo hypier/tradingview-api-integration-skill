@@ -27,19 +27,35 @@
 
 **Interfaces:**
 - Consumes: local repository path and the cached `npx skills` CLI.
-- Produces: a project install at `.agents/skills/tradingview-api-integration` and lock entry `skills/tradingview-api-integration/SKILL.md`.
+- Produces: a project install at `.agents/skills/tradingview-api-integration` containing only the self-contained skill directory.
 
-- [ ] **Step 1: Add the failing packaging regression test**
+- [x] **Step 1: Add the failing packaging regression test**
 
-Create `tests/test_skill_package.sh`:
+Create `tests/test_skill_package.sh` to assert the source uses a nested skill boundary, then install it into a temporary Git project and assert the installed files:
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+SOURCE_SKILL="$REPO_ROOT/skills/tradingview-api-integration"
+TEMP_ROOT=${TMPDIR:-/tmp}
+TEMP_ROOT=${TEMP_ROOT%/}
 TEMP_PROJECT=$(mktemp -d)
-trap 'rm -rf "$TEMP_PROJECT"' EXIT
+
+cleanup() {
+  case "$TEMP_PROJECT" in
+    "$TEMP_ROOT"/tmp.*) rm -rf -- "$TEMP_PROJECT" ;;
+    *) printf 'Refusing to remove unexpected path: %s\n' "$TEMP_PROJECT" >&2 ;;
+  esac
+}
+trap cleanup EXIT
+
+test ! -e "$REPO_ROOT/SKILL.md"
+test -f "$SOURCE_SKILL/SKILL.md"
+test -f "$SOURCE_SKILL/scripts/tv_api.py"
+test -f "$SOURCE_SKILL/references/endpoint-catalog.md"
+test -f "$SOURCE_SKILL/references/openapi.json"
 
 git -C "$TEMP_PROJECT" init -q
 (
@@ -55,29 +71,16 @@ test -f "$INSTALL_DIR/references/openapi.json"
 test ! -f "$INSTALL_DIR/README.md"
 test ! -f "$INSTALL_DIR/LICENSE"
 
-python3 - "$TEMP_PROJECT/skills-lock.json" <<'PY'
-import json
-import sys
-
-with open(sys.argv[1], encoding="utf-8") as lock_file:
-    lock = json.load(lock_file)
-
-actual = lock["skills"]["tradingview-api-integration"]["skillPath"]
-expected = "skills/tradingview-api-integration/SKILL.md"
-if actual != expected:
-    raise SystemExit(f"expected skillPath {expected!r}, got {actual!r}")
-PY
-
 echo "skill package layout: ok"
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `bash tests/test_skill_package.sh`
 
-Expected: FAIL because the lock currently records root `SKILL.md` and installs repository-only files.
+Expected: FAIL because the repository currently has a root `SKILL.md` and local installation includes repository-only files.
 
-- [ ] **Step 3: Move the complete skill into its named directory**
+- [x] **Step 3: Move the complete skill into its named directory**
 
 Run:
 
@@ -86,13 +89,13 @@ mkdir -p skills/tradingview-api-integration
 git mv SKILL.md scripts references skills/tradingview-api-integration/
 ```
 
-- [ ] **Step 4: Run the packaging test to verify it passes**
+- [x] **Step 4: Run the packaging test to verify it passes**
 
 Run: `bash tests/test_skill_package.sh`
 
 Expected: PASS with no output beyond the success message.
 
-- [ ] **Step 5: Commit the package layout**
+- [x] **Step 5: Commit the package layout**
 
 ```bash
 git add tests/test_skill_package.sh skills/tradingview-api-integration docs/superpowers/plans/2026-07-10-skill-packaging.md
